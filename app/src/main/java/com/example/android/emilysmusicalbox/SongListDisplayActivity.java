@@ -11,9 +11,12 @@ import java.util.ArrayList;
 
 public class SongListDisplayActivity extends AppCompatActivity {
 
+    public static final String title_key = "titleId";
+    public static final String artist_key = "artistId";
+    public static final String album_key = "albumId";
+
     /**
      * Sets up the layout, the arraylist of songs, and the adapter for the listview
-     * @param savedInstanceState
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,26 +24,26 @@ public class SongListDisplayActivity extends AppCompatActivity {
         setContentView(R.layout.activity_song_list_display);
 
         final ArrayList<Song> songsList = new ArrayList<>();
-        songsList.add(new Song("I Miss You", "blink-182", "Blink-182"));
-        songsList.add(new Song("Yours To Hold", "Skillet", "Comatose"));
-        songsList.add(new Song("LOVE. (FT Zacari)", "Kendrick Lamar", "DAMN."));
-        songsList.add(new Song("Hold On, We're Going Home", "Majid Jordan, Drake", "Nothing Was the Same (Deluxe)"));
-        songsList.add(new Song("Better in Stereo", "Dove Cameron", "Liv and Maddie (Music from the TV Series)"));
-        songsList.add(new Song("As If", "Blaque", "Blaque Out"));
-        songsList.add(new Song("Me Enamore", "Shakira", "El Dorado"));
-        songsList.add(new Song("Let Me Love You", "Mario", "Turning Point"));
-        songsList.add(new Song("I'm Already Gone", "A Day to Remember", "Common Courtesy"));
-        songsList.add(new Song("Te Quiero Tanto, Tanto", "OV7", "Entrega Total"));
-        songsList.add(new Song("In Florida", "A Day to Remember", "Bad Vibrations"));
-        songsList.add(new Song("Mi Niña Bonita", "Chino y Nacho", "Mi Niña Bonita"));
-        songsList.add(new Song("Down", "Lil Wayne, Jay Sean", "All or Nothing"));
-        songsList.add(new Song("Antes De Que Te Vayas", "Marco Antonio Solis", "Trozos de Mi Alma, Vol. 2"));
-        songsList.add(new Song("Love Story", "Taylor Swift", "Fearless"));
+        songsList.add(new Song(R.string.first_song_title, R.string.first_song_artist, R.string.first_song_album));
+        songsList.add(new Song(R.string.second_song_title, R.string.second_song_artist, R.string.second_song_album));
+        songsList.add(new Song(R.string.third_song_title, R.string.third_song_artist, R.string.third_song_album));
+        songsList.add(new Song(R.string.fourth_song_title, R.string.fourth_song_artist, R.string.fourth_song_album));
+        songsList.add(new Song(R.string.fifth_song_title, R.string.fifth_song_artist, R.string.fifth_song_album));
+        songsList.add(new Song(R.string.sixth_song_title, R.string.sixth_song_artist, R.string.sixth_song_album));
+        songsList.add(new Song(R.string.seventh_song_title, R.string.seventh_song_artist, R.string.seventh_song_album));
+        songsList.add(new Song(R.string.eighth_song_title, R.string.eighth_song_artist, R.string.eighth_song_album));
+        songsList.add(new Song(R.string.ninth_song_title, R.string.ninth_song_artist, R.string.ninth_song_album));
+        songsList.add(new Song(R.string.tenth_song_title, R.string.tenth_song_artist, R.string.tenth_song_album));
+        songsList.add(new Song(R.string.eleventh_song_title, R.string.eleventh_song_artist, R.string.eleventh_song_album));
+        songsList.add(new Song(R.string.twelfth_song_title, R.string.twelfth_song_artist, R.string.twelfth_song_album));
+        songsList.add(new Song(R.string.thirteenth_song_title, R.string.thirteenth_song_artist, R.string.thirteenth_song_album));
+        songsList.add(new Song(R.string.fourteenth_song_title, R.string.fourteenth_song_artist, R.string.fourteenth_song_album));
+        songsList.add(new Song(R.string.fifteenth_song_title, R.string.fifteenth_song_artist, R.string.fifteenth_song_album));
 
         final SongAdapter itemsAdapter = new SongAdapter(this, songsList);
 
-        ListView listView = (ListView) findViewById(R.id.list);
-        Button nowPlaying = (Button) findViewById(R.id.now_playing);
+        ListView listView = findViewById(R.id.list);
+        Button nowPlaying = findViewById(R.id.now_playing);
 
         listView.setAdapter(itemsAdapter);
 
@@ -52,16 +55,11 @@ public class SongListDisplayActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(SongListDisplayActivity.this, NowPlayingActivity.class);
-                if (itemsAdapter.getNowPlaying() == -1){
-                    i.putExtra("title", "No song playing");
-                    i.putExtra("artist", "");
-                    i.putExtra("album", "");
-                }
-                else {
+                if (itemsAdapter.getNowPlaying() != -1) {
                     Song playing = songsList.get(itemsAdapter.getNowPlaying());
-                    i.putExtra("title", playing.getTitle());
-                    i.putExtra("artist", playing.getArtist());
-                    i.putExtra("album", playing.getAlbum());
+                    i.putExtra(title_key, playing.getTitleId());
+                    i.putExtra(artist_key, playing.getArtistId());
+                    i.putExtra(album_key, playing.getAlbumId());
                 }
                 startActivity(i);
             }

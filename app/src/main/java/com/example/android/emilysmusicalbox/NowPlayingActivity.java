@@ -17,12 +17,16 @@ public class NowPlayingActivity extends AppCompatActivity {
         TextView album = findViewById(R.id.album);
 
         Intent i = getIntent();
-        String songTitle = i.getStringExtra("title");
-        String songArtist = i.getStringExtra("artist");
-        String songAlbum = i.getStringExtra("album");
+        if (i.getExtras() != null) {
+            int songTitle = i.getIntExtra(SongListDisplayActivity.title_key, 0);
+            int songArtist = i.getIntExtra(SongListDisplayActivity.artist_key, 0);
+            int songAlbum = i.getIntExtra(SongListDisplayActivity.album_key, 0);
 
-        title.setText(songTitle);
-        artist.setText(songArtist);
-        album.setText(songAlbum);
+            title.setText(getApplicationContext().getString(songTitle));
+            artist.setText(getApplicationContext().getString(songArtist));
+            album.setText(getApplicationContext().getString(songAlbum));
+        } else {
+            title.setText(getApplicationContext().getString(R.string.no_song_playing));
+        }
     }
 }

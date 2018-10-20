@@ -1,6 +1,7 @@
 package com.example.android.emilysmusicalbox;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +16,8 @@ import java.util.ArrayList;
  */
 
 public class SongAdapter extends ArrayAdapter<Song> {
-    private ArrayList<Song> mSongList = new ArrayList<>();
-    private int mNowPlaying = -1;
+    private ArrayList<Song> songList;
+    private int nowPlaying = -1;
 
     /**
      * My first review suggested that I use viewHolder so that I wouldn't have to call findViewById
@@ -41,22 +42,22 @@ public class SongAdapter extends ArrayAdapter<Song> {
      */
     public SongAdapter(Context c, ArrayList<Song> songs) {
         super(c, 0, songs);
-        mSongList = songs;
+        songList = songs;
     }
 
     /**
      * Sets up the view for each list item
      * @param position position of the song in the arraylist
      * @param convertView view for the list item
-     * @param parent
      * @return the view for the list item
      */
+    @NonNull
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
         ViewHolder holder;
 
         //Basically this if statement creates a viewHolder for the list item if it hasn't already
-        if (convertView == null) {
+        if (null == convertView) {
             convertView = LayoutInflater.from(getContext()).inflate(
                     R.layout.list_item, parent, false);
 
@@ -67,13 +68,13 @@ public class SongAdapter extends ArrayAdapter<Song> {
         }
 
         //Load current song and its information
-        final Song currentSong = mSongList.get(position);
+        final Song currentSong = songList.get(position);
 
-        holder.titleTextView.setText(currentSong.getTitle());
+        holder.titleTextView.setText(getContext().getString(currentSong.getTitleId()));
 
-        holder.artistTextView.setText(currentSong.getArtist());
+        holder.artistTextView.setText(getContext().getString(currentSong.getArtistId()));
 
-        if (position != mNowPlaying){
+        if (position != nowPlaying){
             holder.statusImageView.setImageResource(R.drawable.purple_play_icons8);
         } else {
             holder.statusImageView.setImageResource(R.drawable.purple_pause_icons8);
@@ -82,12 +83,12 @@ public class SongAdapter extends ArrayAdapter<Song> {
         holder.statusImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mNowPlaying == position){
-                    mNowPlaying = -1;
+                if (nowPlaying == position){
+                    nowPlaying = -1;
                     SongAdapter.super.notifyDataSetChanged();
                 }
                 else {
-                    mNowPlaying = position;
+                    nowPlaying = position;
                     SongAdapter.super.notifyDataSetChanged();
                 }
             }
@@ -101,6 +102,6 @@ public class SongAdapter extends ArrayAdapter<Song> {
      * or -1 if no song is playing
      */
     public int getNowPlaying(){
-        return mNowPlaying;
+        return nowPlaying;
     }
 }

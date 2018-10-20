@@ -5,25 +5,25 @@ package com.example.android.emilysmusicalbox;
  */
 
 public class Song {
-    private String title;
-    private String artist;
-    private String album;
+    private int titleId;
+    private int artistId;
+    private int albumId;
 
-    public Song(String t, String a, String al){
-        title = t;
-        artist = a;
-        album = al;
+    public Song(int title, int artist, int album){
+        titleId = title;
+        artistId = artist;
+        albumId = album;
     }
 
-    public String getTitle(){
-        return title;
+    public int getTitleId(){
+        return titleId;
     }
 
-    public String getArtist(){
-        return artist;
+    public int getArtistId(){
+        return artistId;
     }
 
-    public String getAlbum(){
-        return album;
+    public int getAlbumId(){
+        return albumId;
     }
 }
