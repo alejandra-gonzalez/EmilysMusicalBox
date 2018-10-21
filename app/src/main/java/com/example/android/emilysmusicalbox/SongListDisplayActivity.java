@@ -3,6 +3,7 @@ package com.example.android.emilysmusicalbox;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -52,6 +53,9 @@ public class SongListDisplayActivity extends AppCompatActivity {
 
         Button nowPlaying = findViewById(R.id.now_playing);
         recyclerView.setAdapter(itemsAdapter);
+
+        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(),
+                DividerItemDecoration.VERTICAL));
 
         /*
          * This code launches the Now Playing activity.

@@ -11,7 +11,9 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/icon_desc"
         android:src="@drawable/purple_play_icons8"
-        android:padding="@dimen/edge_margin" />
+        android:padding="@dimen/edge_margin"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <TextView
         android:id="@+id/title"
@@ -29,6 +31,7 @@
         android:layout_marginTop="@dimen/text_margin"
         app:layout_constraintLeft_toRightOf="@id/play_button"
         app:layout_constraintTop_toBottomOf="@id/title"
-        tools:text="Drake" />
+        tools:text="Drake"
+        android:paddingBottom="@dimen/text_margin"/>
 
 </android.support.constraint.ConstraintLayout>
