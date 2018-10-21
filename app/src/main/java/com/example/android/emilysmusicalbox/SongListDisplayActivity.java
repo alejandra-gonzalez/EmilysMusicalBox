@@ -3,6 +3,8 @@ package com.example.android.emilysmusicalbox;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -42,10 +44,14 @@ public class SongListDisplayActivity extends AppCompatActivity {
 
         final SongAdapter itemsAdapter = new SongAdapter(this, songsList);
 
-        ListView listView = findViewById(R.id.list);
-        Button nowPlaying = findViewById(R.id.now_playing);
+        RecyclerView recyclerView = findViewById(R.id.list);
+        recyclerView.setHasFixedSize(true);
 
-        listView.setAdapter(itemsAdapter);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        Button nowPlaying = findViewById(R.id.now_playing);
+        recyclerView.setAdapter(itemsAdapter);
 
         /*
          * This code launches the Now Playing activity.

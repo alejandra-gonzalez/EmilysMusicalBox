@@ -5,4 +5,5 @@
     <dimen name="artist">36sp</dimen>
     <dimen name="album">24sp</dimen>
     <dimen name="more_margin">32dp</dimen>
+    <dimen name="text_margin">8dp</dimen>
 </resources>
